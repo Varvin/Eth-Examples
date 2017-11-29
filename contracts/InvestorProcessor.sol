@@ -2,9 +2,9 @@ pragma solidity ^0.4.17;
 
 contract InvestorProcessor {
 	
-	address private owner;
-	address[] private investors;
-	mapping(address => uint256) private investorIndex;
+	address public owner;
+	address[] public investors;
+	mapping(address => uint256) public investorIndex;
 
 	modifier restricted() {
 		if (msg.sender == owner) _;
@@ -12,6 +12,8 @@ contract InvestorProcessor {
 
 	function InvestorProcessor() public {
 		owner = msg.sender;
+		investors.push(owner);
+		delete investors[0];
 	}
 
 	function add(address investor) public restricted {
