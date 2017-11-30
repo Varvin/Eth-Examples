@@ -12,19 +12,17 @@ contract InvestorProcessor {
 
 	function InvestorProcessor() public {
 		owner = msg.sender;
-		investors.push(owner);
-		delete investors[0];
 	}
 
 	function add(address investor) public restricted {
 		if(investorIndex[investor] == 0){
 			investors.push(investor);
-			investorIndex[investor] = investors.length - 1;
+			investorIndex[investor] = investors.length;
 		}
 	}
 
 	function remove(address investor) public restricted {
-		uint256 index = investorIndex[investor];
+		uint256 index = investorIndex[investor] - 1;
 		delete investors[index];
 		investorIndex[investor] = 0;
 	}
@@ -38,7 +36,7 @@ contract InvestorProcessor {
 	}
 
 	function replace(address oldAddress, address newAddress) public restricted {
-		uint256 index = investorIndex[oldAddress];
+		uint256 index = investorIndex[oldAddress] - 1;
 		investors[index] = newAddress;
 		investorIndex[oldAddress] = 0;
 		investorIndex[newAddress] = index;

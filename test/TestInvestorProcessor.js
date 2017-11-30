@@ -8,8 +8,8 @@ contract('TestInvestorProcessor', function(accounts) {
 		console.log("122345")
 		await processor.add(accounts[1],{from:accounts[0]});
 		console.log("qww")
-		let addresses = await processor.getAll.call({from:accounts[0]});
-		console.log('!!!!!!!!!!!!!!', addresses);
-		assert.equal(addresses[1],accounts[1],"Returned vrong account id");
+		// let addresses = await processor.getAll.call({from:accounts[0]});
+		console.log('!!!!!!!!!!!!!!', "" + await processor.investors[0]);
+		assert.equal(processor.investors[0],accounts[1],"Returned vrong account id");
 	});
 });
